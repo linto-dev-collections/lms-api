@@ -1,0 +1,2 @@
+class CertificateDelivery < ApplicationDelivery
+end

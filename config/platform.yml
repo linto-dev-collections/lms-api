@@ -1,0 +1,9 @@
+development:
+  max_enrollment_per_course: 100
+  pagination_default_per_page: 20
+  pagination_max_per_page: 50
+
+test:
+  max_enrollment_per_course: 10
+  pagination_default_per_page: 5
+  pagination_max_per_page: 20

@@ -1,0 +1,2 @@
+class CourseDelivery < ApplicationDelivery
+end

@@ -1,0 +1,10 @@
+# .dockerignore
+.git
+.gitignore
+log/*
+tmp/*
+storage/*
+.docker
+node_modules
+.bundle
+vendor/bundle

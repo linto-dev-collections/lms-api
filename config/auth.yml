@@ -1,0 +1,11 @@
+development:
+  access_token_expiry: 900
+  refresh_token_expiry: 604800
+  jwt_algorithm: "HS256"
+  refresh_token_reuse_detection: true
+
+test:
+  access_token_expiry: 300
+  refresh_token_expiry: 3600
+  jwt_algorithm: "HS256"
+  refresh_token_reuse_detection: true
