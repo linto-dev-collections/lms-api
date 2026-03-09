@@ -60,6 +60,7 @@ FROM base AS production
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y \
       curl \
+      libjemalloc2 \
       libpq5 && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
