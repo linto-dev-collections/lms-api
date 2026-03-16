@@ -190,7 +190,7 @@ GEM
       racc (~> 1.4)
     nokogiri (1.19.1-x86_64-linux-musl)
       racc (~> 1.4)
-    pagy (43.3.1)
+    pagy (43.4.0)
       json
       uri
       yaml
@@ -272,14 +272,14 @@ GEM
     rspec-mocks (3.13.8)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.13.0)
-    rspec-rails (8.0.3)
+    rspec-rails (8.0.4)
       actionpack (>= 7.2)
       activesupport (>= 7.2)
       railties (>= 7.2)
-      rspec-core (~> 3.13)
-      rspec-expectations (~> 3.13)
-      rspec-mocks (~> 3.13)
-      rspec-support (~> 3.13)
+      rspec-core (>= 3.13.0, < 5.0.0)
+      rspec-expectations (>= 3.13.0, < 5.0.0)
+      rspec-mocks (>= 3.13.0, < 5.0.0)
+      rspec-support (>= 3.13.0, < 5.0.0)
     rspec-support (3.13.7)
     rswag-api (2.17.0)
       activesupport (>= 5.2, < 8.2)
@@ -354,7 +354,7 @@ GEM
       base64
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
-    yabeda (0.15.0)
+    yabeda (0.16.0)
       anyway_config (>= 1.0, < 3)
       concurrent-ruby
       dry-initializer
@@ -392,7 +392,7 @@ DEPENDENCIES
   dry-monads (~> 1.9)
   factory_bot_rails (~> 6.5)
   jwt (~> 3.1)
-  pagy (~> 43.0)
+  pagy (~> 43.4)
   pg (~> 1.5)
   puma (>= 5)
   rails (~> 8.1)
@@ -405,7 +405,7 @@ DEPENDENCIES
   solid_cache (~> 1.0)
   solid_queue (~> 1.1)
   store_model (~> 4.0)
-  yabeda (~> 0.14)
+  yabeda (~> 0.16)
   yabeda-rails (~> 0.10)
 
 BUNDLED WITH

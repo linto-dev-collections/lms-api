@@ -34,10 +34,10 @@ gem "anyway_config", "~> 2.8"
 gem "store_model", "~> 4.0"
 
 # Pagination
-gem "pagy", "~> 43.0"
+gem "pagy", "~> 43.4"
 
 # Metrics
-gem "yabeda", "~> 0.14"
+gem "yabeda", "~> 0.16"
 gem "yabeda-rails", "~> 0.10"
 
 # API Documentation
