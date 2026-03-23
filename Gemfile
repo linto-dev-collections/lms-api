@@ -3,7 +3,7 @@ source "https://rubygems.org"
 gem "rails", "~> 8.1"
 gem "pg", "~> 1.5"
 gem "puma", ">= 5"
-gem "solid_queue", "~> 1.1"
+gem "solid_queue", "~> 1.4"
 gem "solid_cache", "~> 1.0"
 gem "bcrypt", "~> 3.1"
 gem "bootsnap", require: false
@@ -34,10 +34,10 @@ gem "anyway_config", "~> 2.8"
 gem "store_model", "~> 4.0"
 
 # Pagination
-gem "pagy", "~> 43.0"
+gem "pagy", "~> 43.4"
 
 # Metrics
-gem "yabeda", "~> 0.14"
+gem "yabeda", "~> 0.16"
 gem "yabeda-rails", "~> 0.10"
 
 # API Documentation
