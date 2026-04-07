@@ -8,3 +8,6 @@ storage/*
 node_modules
 .bundle
 vendor/bundle
+
+# Credentials key files — never include in Docker images
+config/*.key

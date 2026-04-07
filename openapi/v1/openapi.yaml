@@ -704,6 +704,30 @@ components:
           - password
       required:
       - auth
+    verify_email_params:
+      type: object
+      properties:
+        token:
+          type: string
+          description: メール認証トークン
+      required:
+      - token
+    resend_verification_params:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          description: 登録メールアドレス
+      required:
+      - email
+    message_response:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
     dashboard:
       type: object
       properties:
@@ -869,20 +893,10 @@ paths:
               schema:
                 type: object
                 properties:
-                  user:
-                    "$ref": "#/components/schemas/user"
-                  access_token:
+                  message:
                     type: string
-                  refresh_token:
-                    type: string
-                  token_type:
-                    type: string
-                  expires_in:
-                    type: integer
                 required:
-                - user
-                - access_token
-                - refresh_token
+                - message
         '422':
           description: バリデーションエラー
           content:
@@ -928,11 +942,74 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/error_response"
+        '403':
+          description: メール未認証
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_response"
       requestBody:
         content:
           application/json:
             schema:
               "$ref": "#/components/schemas/login_params"
+  "/api/v1/auth/verify_email":
+    post:
+      summary: メールアドレス認証
+      tags:
+      - Auth
+      parameters: []
+      responses:
+        '200':
+          description: 認証成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    "$ref": "#/components/schemas/user"
+                  access_token:
+                    type: string
+                  refresh_token:
+                    type: string
+                  token_type:
+                    type: string
+                  expires_in:
+                    type: integer
+                required:
+                - user
+                - access_token
+                - refresh_token
+        '422':
+          description: 無効なトークン
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_response"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/verify_email_params"
+  "/api/v1/auth/resend_verification":
+    post:
+      summary: 認証メール再送信
+      tags:
+      - Auth
+      parameters: []
+      responses:
+        '200':
+          description: 送信成功（ユーザー存在有無に関わらず同一レスポンス）
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/message_response"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/resend_verification_params"
   "/api/v1/auth/logout":
     delete:
       summary: ログアウト

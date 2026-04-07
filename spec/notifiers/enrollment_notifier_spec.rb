@@ -27,7 +27,7 @@ RSpec.describe EnrollmentNotifier do
 
       delivery = AbstractNotifier::Testing::Driver.deliveries.last
       expect(delivery[:to]).to eq(student)
-      expect(delivery[:notification_type]).to eq("enrollment_completed")
+      expect(delivery[:notification_type]).to eq("enrollment_created")
     end
   end
 

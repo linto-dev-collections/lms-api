@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  include EmailVerifiable
+
   has_secure_password
 
   # Associations

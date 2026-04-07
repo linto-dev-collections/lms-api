@@ -1,0 +1,11 @@
+<%= @course.instructor.name %> 様
+
+「<%= @course.title %>」に新しいレビューが投稿されました。
+
+評価: <%= @review.rating %> / 5
+<% if @review.comment.present? %>
+コメント: <%= @review.comment %>
+<% end %>
+
+--
+LMS 通知システム

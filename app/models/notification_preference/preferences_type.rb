@@ -9,7 +9,7 @@ class NotificationPreference::PreferencesType
                 course_approved: false,
                 course_rejected: false,
                 new_enrollment: false,
-                enrollment_completed: false,
+                enrollment_created: false,
                 certificate_issued: false,
                 new_review: false
               )

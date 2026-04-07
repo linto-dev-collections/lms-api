@@ -39,4 +39,12 @@ Rails.application.configure do
 
   # Raise error when a before_action's only/except options reference missing actions.
   config.action_controller.raise_on_missing_callback_actions = true
+
+  # ActionMailer 設定
+  config.action_mailer.delivery_method = :test
+  config.action_mailer.perform_caching = false
+  config.action_mailer.default_url_options = { host: "localhost", port: 3000 }
+
+  # ActiveJob テストマッチャー（have_enqueued_mail 等）を使用するため :test を設定
+  config.active_job.queue_adapter = :test
 end

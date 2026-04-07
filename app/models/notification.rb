@@ -7,7 +7,7 @@ class Notification < ApplicationRecord
                                 inclusion: {
                                   in: %w[
                                     course_approved course_rejected
-                                    new_enrollment enrollment_completed
+                                    new_enrollment enrollment_created
                                     certificate_issued new_review
                                   ]
                                 }

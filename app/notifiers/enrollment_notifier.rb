@@ -25,7 +25,7 @@ class EnrollmentNotifier < AbstractNotifier::Base
     notification(
       body: "「#{enrollment.course.title}」への受講登録が完了しました",
       to: enrollment.user,
-      notification_type: "enrollment_completed",
+      notification_type: "enrollment_created",
       params: {
         course_id: enrollment.course.id,
         course_title: enrollment.course.title

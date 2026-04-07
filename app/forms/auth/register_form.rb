@@ -14,7 +14,7 @@ module Auth
 
     validates :email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }
     validates :name, presence: true, length: { maximum: 100 }
-    validates :password, presence: true, length: { minimum: 8 }
+    validates :password, presence: true, length: { minimum: 8, maximum: 128 }
     validates :password_confirmation, presence: true
     validates :role, inclusion: { in: %w[student instructor] }, allow_blank: true
     validate :passwords_match

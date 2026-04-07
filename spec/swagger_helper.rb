@@ -500,6 +500,30 @@ RSpec.configure do |config|
             required: %w[auth]
           },
 
+          verify_email_params: {
+            type: :object,
+            properties: {
+              token: { type: :string, description: "メール認証トークン" }
+            },
+            required: %w[token]
+          },
+
+          resend_verification_params: {
+            type: :object,
+            properties: {
+              email: { type: :string, format: "email", description: "登録メールアドレス" }
+            },
+            required: %w[email]
+          },
+
+          message_response: {
+            type: :object,
+            properties: {
+              message: { type: :string }
+            },
+            required: %w[message]
+          },
+
           # ===== ダッシュボード =====
           dashboard: {
             type: :object,

@@ -48,7 +48,7 @@ RUN apt-get update -qq && \
       curl && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
-ENV RAILS_ENV="development"
+COPY --from=build "${BUNDLE_PATH}" "${BUNDLE_PATH}"
 
 CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]
 

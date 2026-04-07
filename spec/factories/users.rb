@@ -4,6 +4,11 @@ FactoryBot.define do
     name { "テストユーザー" }
     password { "password123" }
     role { "student" }
+    email_verified_at { Time.current }
+
+    trait :unverified do
+      email_verified_at { nil }
+    end
 
     trait :admin do
       role { "admin" }

@@ -30,3 +30,6 @@
 
 # Ignore key files for decrypting credentials and more.
 /config/*.key
+
+# Ignore anyway_config local overrides.
+/config/*.local.yml

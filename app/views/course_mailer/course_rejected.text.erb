@@ -1,0 +1,12 @@
+<%= @course.instructor.name %> 様
+
+「<%= @course.title %>」は却下されました。
+
+<% if @reason.present? %>
+理由: <%= @reason %>
+<% end %>
+
+内容を修正の上、再度審査に提出してください。
+
+--
+LMS 通知システム

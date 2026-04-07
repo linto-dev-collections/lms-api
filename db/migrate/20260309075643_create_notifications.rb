@@ -17,7 +17,7 @@ class CreateNotifications < ActiveRecord::Migration[8.1]
               name: "index_notifications_unread"
 
     add_check_constraint :notifications,
-      "notification_type IN ('course_approved', 'course_rejected', 'new_enrollment', 'enrollment_completed', 'certificate_issued', 'new_review')",
+      "notification_type IN ('course_approved', 'course_rejected', 'new_enrollment', 'enrollment_created', 'certificate_issued', 'new_review')",
       name: "chk_notifications_type"
   end
 end

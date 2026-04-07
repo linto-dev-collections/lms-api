@@ -27,6 +27,9 @@ gem "dry-monads", "~> 1.9"
 # Notification
 gem "active_delivery", "~> 1.2"
 
+# Email Delivery
+gem "resend", "~> 1.0"
+
 # Configuration
 gem "anyway_config", "~> 2.8"
 
@@ -43,6 +46,7 @@ gem "yabeda-rails", "~> 0.10"
 # API Documentation
 gem "rswag-api"
 gem "rswag-ui"
+gem "ostruct"
 
 group :development do
   gem "rubocop-rails-omakase", require: false

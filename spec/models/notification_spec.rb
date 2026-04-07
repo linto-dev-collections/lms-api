@@ -14,7 +14,7 @@ RSpec.describe Notification, type: :model do
     end
 
     it "accepts valid notification_type" do
-      %w[course_approved course_rejected new_enrollment enrollment_completed certificate_issued new_review].each do |type|
+      %w[course_approved course_rejected new_enrollment enrollment_created certificate_issued new_review].each do |type|
         notification = build(:notification, notification_type: type)
         expect(notification).to be_valid
       end

@@ -7,7 +7,7 @@ class CreateNotificationPreferences < ActiveRecord::Migration[8.1]
           "course_approved" => true,
           "course_rejected" => true,
           "new_enrollment" => true,
-          "enrollment_completed" => true,
+          "enrollment_created" => true,
           "certificate_issued" => true,
           "new_review" => true
         },
@@ -15,7 +15,7 @@ class CreateNotificationPreferences < ActiveRecord::Migration[8.1]
           "course_approved" => false,
           "course_rejected" => false,
           "new_enrollment" => false,
-          "enrollment_completed" => false,
+          "enrollment_created" => false,
           "certificate_issued" => false,
           "new_review" => false
         }

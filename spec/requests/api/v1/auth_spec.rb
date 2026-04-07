@@ -16,13 +16,9 @@ RSpec.describe "Api::V1::Auth", type: :request do
       response "201", "登録成功" do
         schema type: :object,
                properties: {
-                 user: { "$ref" => "#/components/schemas/user" },
-                 access_token: { type: :string },
-                 refresh_token: { type: :string },
-                 token_type: { type: :string },
-                 expires_in: { type: :integer }
+                 message: { type: :string }
                },
-               required: %w[user access_token refresh_token]
+               required: %w[message]
 
         let(:params) do
           {
@@ -37,9 +33,8 @@ RSpec.describe "Api::V1::Auth", type: :request do
 
         run_test! do |response|
           data = JSON.parse(response.body)
-          expect(data["access_token"]).to be_present
-          expect(data["refresh_token"]).to be_present
-          expect(data["user"]["email"]).to eq("test@example.com")
+          expect(data["message"]).to be_present
+          expect(data).not_to have_key("access_token")
         end
       end
 
@@ -89,6 +84,85 @@ RSpec.describe "Api::V1::Auth", type: :request do
         let(:params) { { auth: { email: "wrong@example.com", password: "wrong" } } }
 
         run_test!
+      end
+
+      response "403", "メール未認証" do
+        schema "$ref" => "#/components/schemas/error_response"
+
+        let(:user) do
+          create(:user, :unverified, email: "unverified@example.com", password: "password123")
+        end
+        let(:params) { { auth: { email: user.email, password: "password123" } } }
+
+        run_test! do |response|
+          data = JSON.parse(response.body)
+          expect(data["error"]["code"]).to eq("email_not_verified")
+        end
+      end
+    end
+  end
+
+  path "/api/v1/auth/verify_email" do
+    post "メールアドレス認証" do
+      tags "Auth"
+      consumes "application/json"
+      produces "application/json"
+
+      parameter name: :params, in: :body, schema: {
+        "$ref" => "#/components/schemas/verify_email_params"
+      }
+
+      response "200", "認証成功" do
+        schema type: :object,
+               properties: {
+                 user: { "$ref" => "#/components/schemas/user" },
+                 access_token: { type: :string },
+                 refresh_token: { type: :string },
+                 token_type: { type: :string },
+                 expires_in: { type: :integer }
+               },
+               required: %w[user access_token refresh_token]
+
+        let(:user) { create(:user, email_verified_at: nil) }
+        let(:params) { { token: user.email_verification_token } }
+
+        run_test! do |response|
+          data = JSON.parse(response.body)
+          expect(data["access_token"]).to be_present
+          expect(user.reload.email_verified?).to be true
+        end
+      end
+
+      response "422", "無効なトークン" do
+        schema "$ref" => "#/components/schemas/error_response"
+
+        let(:params) { { token: "invalid_token" } }
+
+        run_test!
+      end
+    end
+  end
+
+  path "/api/v1/auth/resend_verification" do
+    post "認証メール再送信" do
+      tags "Auth"
+      consumes "application/json"
+      produces "application/json"
+
+      parameter name: :params, in: :body, schema: {
+        "$ref" => "#/components/schemas/resend_verification_params"
+      }
+
+      response "200", "送信成功（ユーザー存在有無に関わらず同一レスポンス）" do
+        schema "$ref" => "#/components/schemas/message_response"
+
+        let(:user) { create(:user, email_verified_at: nil, email_verification_sent_at: nil) }
+        let(:params) { { email: user.email } }
+
+        run_test! do |response|
+          data = JSON.parse(response.body)
+          expect(data["message"]).to be_present
+        end
       end
     end
   end

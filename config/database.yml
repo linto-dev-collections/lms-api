@@ -10,8 +10,9 @@ development:
 
 test:
   <<: *default
-  url: <%= ENV.fetch("DATABASE_URL", "").sub(/olp_development/, "olp_test") %>
+  url: <%= ENV.fetch("TEST_DATABASE_URL") { ENV.fetch("DATABASE_URL", "").sub(/olp_development/, "olp_test") } %>
 
 production:
   <<: *default
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 10 } %>
   connect_timeout: 15

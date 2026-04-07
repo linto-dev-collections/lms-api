@@ -1,22 +1,41 @@
+x-app: &app
+  build:
+    context: .
+    dockerfile: Dockerfile
+    target: development
+  env_file: .env
+  environment:
+    DATABASE_URL: postgres://olp:password@db:5432/olp_development
+  volumes:
+    - .:/app
+    - bundle_cache:/usr/local/bundle
+  stdin_open: true
+  tty: true
+
 services:
   web:
-    build:
-      context: .
-      dockerfile: Dockerfile
-      target: development
+    <<: *app
     ports:
       - "3000:3000"
     depends_on:
       db:
         condition: service_healthy
-    environment:
-      DATABASE_URL: postgres://olp:password@db:5432/olp_development
-      RAILS_ENV: development
-    volumes:
-      - .:/app
-      - bundle_cache:/usr/local/bundle
-    stdin_open: true
-    tty: true
+    command: bash -c "bin/rails db:prepare && bundle exec puma -C config/puma.rb"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf http://localhost:3000/up || exit 1"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+  worker:
+    <<: *app
+    depends_on:
+      db:
+        condition: service_healthy
+      web:
+        condition: service_healthy
+    command: bundle exec bin/jobs
 
   db:
     image: postgres:18-alpine

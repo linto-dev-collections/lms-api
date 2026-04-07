@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
-  mount Rswag::Ui::Engine => "/api-docs"
-  mount Rswag::Api::Engine => "/api-docs"
+  unless Rails.env.production?
+    mount Rswag::Ui::Engine => "/api-docs"
+    mount Rswag::Api::Engine => "/api-docs"
+  end
   get "up" => "rails/health#show", as: :rails_health_check
 
   namespace :api do
@@ -10,6 +12,8 @@ Rails.application.routes.draw do
       post "auth/login", to: "auth#login"
       delete "auth/logout", to: "auth#logout"
       post "auth/refresh", to: "auth#refresh"
+      post "auth/verify_email", to: "auth#verify_email"
+      post "auth/resend_verification", to: "auth#resend_verification"
 
       # ユーザー
       get "users/me", to: "users#me"
