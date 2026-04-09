@@ -14,5 +14,5 @@ test:
 
 production:
   <<: *default
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 10 } %>
+  pool: <%= ENV.fetch("DB_POOL") { ENV.fetch("RAILS_MAX_THREADS") { 10 } } %>
   connect_timeout: 15
