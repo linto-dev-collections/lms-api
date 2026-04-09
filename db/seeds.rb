@@ -152,7 +152,7 @@ puts "    Courses: #{Course.count}"
 # -----------------------------------------------------------------------------
 puts "  Publishing courses..."
 
-[course1, course2, course3].each do |course|
+[ course1, course2, course3 ].each do |course|
   course.reload
   if course.draft?
     course.submit_for_review!
@@ -195,7 +195,7 @@ enrollment5 = Enrollment.find_or_create_by!(user: student3, course: course2) do 
 end
 
 # Activate enrollments (pending → active)
-[enrollment1, enrollment2, enrollment3, enrollment4, enrollment5].each do |e|
+[ enrollment1, enrollment2, enrollment3, enrollment4, enrollment5 ].each do |e|
   e.reload
   if e.pending?
     e.activate!
