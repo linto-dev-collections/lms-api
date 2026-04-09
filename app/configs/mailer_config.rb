@@ -1,5 +1,3 @@
 class MailerConfig < ApplicationConfig
-  attr_config(
-    from_address: "LMS <noreply@example.com>"
-  )
+  attr_config :from_address
 end
